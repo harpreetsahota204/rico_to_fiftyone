@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# All directories
+/__MACOSX
+/combined
+/filtered_traces
+/semantic_annotations
+/ui_layout_vectors
