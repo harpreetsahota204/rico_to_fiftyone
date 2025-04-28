@@ -179,3 +179,6 @@ cython_debug/
 /filtered_traces
 /semantic_annotations
 /ui_layout_vectors
+
+app_details.csv
+ui_details.csv
