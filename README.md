@@ -1,7 +1,15 @@
 # Parse the RICO dataset into FiftyOne Format
 
+![RICO Dataset Overview](rico.gif)
 
-# Rico Semantic Dataset Details
+This dataset is already parsed into FiftyOne format, you can load it from the [Hugging Face Hub](https://huggingface.co/datasets/Voxel51/rico) as follows:
+
+```python
+import fiftyone as fo
+from fiftyone.utils.huggingface import load_from_hub
+
+dataset = load_from_hub("Voxel51/rico")
+```
 
 ## Dataset Description
 **Curated by:** Thomas F. Liu, Mark Craft, Jason Situ, Ersin Yumer, Radomir Mech, and Ranjitha Kumar (University of Illinois at Urbana-Champaign and Adobe Systems Inc.)
@@ -48,6 +56,27 @@ Each UI element in the hierarchy includes:
 - Component classification (e.g., Icon, Text Button, List Item)
 - Functional classification (e.g., "login" for text buttons, "cart" for icons)
 - Original properties (bounds, class, resource-id, etc.)
+
+# Rico FiftyOne Dataset Structure
+
+**Basic Info:** 66,261 mobile UI screenshots with element annotations
+
+**Core Fields:**
+- `id`: ObjectIdField - Unique identifier
+- `filepath`: StringField - Image path
+- `tags`: ListField(StringField) - Sample categories
+- `metadata`: EmbeddedDocumentField - Image properties (size, dimensions)
+- `ui_vector`: ListField(FloatField) - UI embedding representation
+- `ui_viz`: ListField(FloatField) - Visualization parameters
+- `detections`: EmbeddedDocumentField(Detections) containing multiple Detection objects:
+  - `label`: UI element type (Icon, Text, Image, Toolbar, List Item)
+  - `bounding_box`: Coordinates [x, y, width, height]
+  - `content_or_function`: Text content or function name
+  - `clickable`: Boolean indicating interactivity
+  - `type`: Android widget type
+  - `resource_id`: Android resource identifier
+
+The dataset provides comprehensive annotations of mobile UI elements with detailed information about their appearance, functionality, and interactive properties for machine learning applications.
 
 ## Dataset Creation
 ### Curation Rationale
